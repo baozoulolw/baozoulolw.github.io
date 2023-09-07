@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Baozoulolw">
+
+
+
+    <meta name="description" content="一个想努力学好JAVA的小白">
+
+
+    <meta name="keywords" content="JAVA,IT,游戏">
+
+
+<title>三类循环对比 | Baozoulolw的部落阁</title>
+
+
+
+    <link rel="icon" href="/new.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Baozoulolw&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Baozoulolw&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">三类循环对比</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Baozoulolw</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2023-09-06&nbsp;&nbsp;22:21:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">前端面试</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                    Words:
+                        <a href="">804</a>
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                    Time:
+                        <a href="">4min</a>
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="for-i-、-while"><a href="#for-i-、-while" class="headerlink" title="for i 、 while"></a>for i 、 while</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10000</span>).fill(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for i'</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt; array.length;i++)&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for i'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  for i: 0.248046875 ms</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'while'</span>)</span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (i &lt; array.length)&#123;</span><br><span class="line">  i++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'while'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// while: 0.44482421875 ms</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for i'</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt; array.length;i++)&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for i'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  for i: 0.37109375 ms</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'while'</span>)</span><br><span class="line"><span class="keyword">var</span> iw = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (iw &lt; array.length)&#123;</span><br><span class="line">  iw++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'while'</span>)</span><br><span class="line"><span class="comment">// while: 0.348876953125 ms</span></span><br></pre></td></tr></table></figure>
+<p>代码运行时间受电脑配置影响 ，所以可能各不相同  ,首先可以发现<code>for i</code>的性能是要比<code>while</code>好的。但是当我把<code>let</code>换成<code>var</code>之后，有趣的现象发生了，这两中循环的耗时突然变得接近，<code>for i</code><br>的性能有所降低，这是为什么呢。因为在<code>es5</code>里面<code>var</code>声明的变量是全局变量，不存在块级作用域的概念，内存不会被释放,但使用<code>let</code>后有了块级作用域，每次循环都会释放内存，所以耗时就会变得更低</p>
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">9999999</span>).fill(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> length = array.length</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for i'</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;  i &lt; length ; i++) &#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for i'</span>)</span><br><span class="line"><span class="comment">// for i: 12.59130859375 ms</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'foreach'</span>)</span><br><span class="line">array.forEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'foreach'</span>)</span><br><span class="line"><span class="comment">// foreach: 66.32080078125 ms</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 手写foreach</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.my_foreach = <span class="function"><span class="keyword">function</span> (<span class="params">callback,point</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> callback !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'callback不是一个方法'</span>);</span><br><span class="line">  <span class="keyword">let</span> that = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> length = that.length</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    callback.call(point,that[i],i,that)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 手写some</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.my_some = <span class="function"><span class="keyword">function</span> (<span class="params">callback,point</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> callback !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'callback不是一个方法'</span>);</span><br><span class="line">  <span class="keyword">let</span> that = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> length = that.length</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(callback.call(point,that[i],i,that))&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以明显看出两种循环的执行时间差距，<code>foreach</code>明显是要高于<code>for i</code>的。</p>
+<p>其实观看foreach的底层代码可以发现，<code>foreach</code>其实就是封装的<code>for i</code>循环，因为多了一些其他操作，并且<code>foreach</code>不可以手动退出，只能一条路走到黑。</p>
+<h3 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">9999999</span>).fill(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for of'</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> array)&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for of'</span>)</span><br><span class="line"><span class="comment">// for of: 105.141845703125 ms</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'foreach'</span>)</span><br><span class="line">array.forEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'foreach'</span>)</span><br><span class="line"><span class="comment">// foreach: 58.1259765625 ms</span></span><br><span class="line"></span><br><span class="line">array[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span></span><br><span class="line">  index = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    next()&#123;</span><br><span class="line">      <span class="keyword">if</span>(index &gt; self.length - <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          done:<span class="literal">true</span>,</span><br><span class="line">          value: <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      index ++;</span><br><span class="line">      <span class="keyword">return</span>&#123;</span><br><span class="line">        done:<span class="literal">false</span>,</span><br><span class="line">        value: self[index]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> array) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类数组迭代</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">'b'</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">'c'</span>,</span><br><span class="line">  length:<span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">obj[<span class="built_in">Symbol</span>.iterator] = <span class="built_in">Array</span>.prototype[<span class="built_in">Symbol</span>.iterator]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> obj)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>for of</code>的性能相比<code>foreach</code>的性能还要更差 <br/><br><code>for of</code> 循环原理：迭代器 Symbol.iterator</p>
+<h3 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">9999999</span>).fill(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for of'</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> array)&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for of'</span>)</span><br><span class="line"><span class="comment">// for of: 105.141845703125 ms</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'for in'</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> array)&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'for in'</span>)</span><br><span class="line"><span class="comment">// for in: 1204.194091796875 ms</span></span><br></pre></td></tr></table></figure>
+
+<p><code>for in</code>性能很差，迭代当前对象中所有可枚举的属性，查找机制上一定会搞到原型链上去，所以性能会很差</p>
+<p>总体速度 <code>for i &gt; foreach &gt; for of &gt; for in</code></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Baozoulolw</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY<strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%9D%A2%E8%AF%95/"># 面试</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/09/06/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index/">数据类型检测方式</a>
+            
+            
+            <a class="next" rel="next" href="/2023/09/06/JDBC%E8%BF%9E%E6%8E%A5%E6%B1%A0&JDBCTemplate/">JDBC连接池&JDBCTemplate</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>
+&copy;2020 - 2023
+Baozoulolw | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>
+<br>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+
+    <i class="iconfont icon-fl-renyuan %"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+
+    <i class="iconfont icon-yanjing %"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
