@@ -223,13 +223,13 @@
                     
                         <span class="post-count">
                     Words:
-                        <a href="">825</a>
+                        <a href="">1,499</a>
                         </span>
                     
                     
                         <span class="post-count">
                     Time:
-                        <a href="">3min</a>
+                        <a href="">5min</a>
                         </span>
                     
                 </div>
@@ -240,8 +240,56 @@
             <h1 id="面试提问"><a href="#面试提问" class="headerlink" title="面试提问"></a>面试提问</h1><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>面试官们好，我叫王浩然，今年24岁，来自重庆，来应聘的是贵公司的前端开发岗位。我本人比较擅长vue开发，可以熟练使用vue2，有相对丰富对项目经验，对vue3也有开发经验。可以熟练使用js、css、html三件套，对typescript和less也有使用经验。对地图和大屏的开发也比较熟悉，使用过echarts、openlayer、cesium等前端框架。同时我对后端java技术栈也有一定了解，在上家公司担任过一段时间的前端开发小组长，带领公司的实习生开发。开发过多个大屏和后台管理项目，小程序和app开发也有涉及，希望能胜任此职位。</p>
 <h2 id="项目中遇到的难点"><a href="#项目中遇到的难点" class="headerlink" title="项目中遇到的难点"></a>项目中遇到的难点</h2><p>在开发公司低代码数据可视化平台时，因为我们开发了许多的组件，在打开配置页面的时候第一次会加载很久，我就把每一个组件的.vue文件单独提出来，使用<code>webpack</code>打包成js文件上传到服务器，进入页面的时候就使用异步组件的方式，用网络请求把存储在服务器上的组件请求下来，用<code>loadjs</code>库加载出来再转换为vue组件，就加快了页面首次进入的时间。</p>
 <p>在开发公司的大屏项目时，做大屏项目时因为要在不同的设备上查看效果、开发。很有可能因为分辨率的问题导致在每个人的电脑上展示页面不一样。后来我的解决方案是开发一个全屏容器组件，给定整体的分辨率，然后计算出长宽比例，当组件的大小发生变化时，使里面的内容根据长宽比例缩放，动态更改<code>css</code>的<code>transform</code>的<code>scale</code>属性，这样就可以让容器不会变形。</p>
-<p>在开发公司的项目时，有许多的子项目，在每次部署上线时，有的时候项目会打包很慢，就把公司的打包配置进行了优化。<br>使用了<code>SourceMap</code>（源代码映射），当构建后代码出错会帮我们找到映射后源代码出错的位置，从而让浏览器提示源代码文件出错位置，让我们更快的找到错误根源。对打包比较耗时的项目开启多线程打包，<br>2. 使用<code>thread-loader</code>。为了提高首屏加载速度，在打包的时候就开启<code>gzip</code>压缩，可以使用<code>compression-webpack-plugin</code>插件。<br>3. 使用<code>code Split</code>分割代码，减少首页加载js，code split可以将打包的文件进行分割，生成多个js文件。也实现了按需加载，需要哪个文件就加载哪个文件<br>4. 使用 <code>Preload / Prefetch</code> 对代码进行提前加载，等未来需要使用时就能直接使用，从而用户体验更好。<br>5. 使用 <code>OneOf</code> 让资源文件一旦被某个 <code>loader</code>处理了，就不会继续遍历了，打包速度更快。<br>6. 使用 <code>HotModuleReplacement</code> 让开发时只重新编译打包更新变化了的代码，不变的代码使用缓存，从而使更新速度更快。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+<p>在开发公司的项目时，有许多的子项目，在每次部署上线时，有的时候项目会打包很慢，就把公司的打包配置进行了优化。</p>
+<ol>
+<li>使用了<code>SourceMap</code>（源代码映射），当构建后代码出错会帮我们找到映射后源代码出错的位置，从而让浏览器提示源代码文件出错位置，让我们更快的找到错误根源。对打包比较耗时的项目开启多线程打包，</li>
+<li>使用<code>thread-loader</code>。为了提高首屏加载速度，在打包的时候就开启<code>gzip</code>压缩，可以使用<code>compression-webpack-plugin</code>插件。</li>
+<li>使用<code>code Split</code>分割代码，减少首页加载js，code split可以将打包的文件进行分割，生成多个js文件。也实现了按需加载，需要哪个文件就加载哪个文件</li>
+<li>使用 <code>Preload / Prefetch</code> 对代码进行提前加载，等未来需要使用时就能直接使用，从而用户体验更好。</li>
+<li>使用 <code>OneOf</code> 让资源文件一旦被某个 <code>loader</code>处理了，就不会继续遍历了，打包速度更快。</li>
+<li>使用 <code>HotModuleReplacement</code> 让开发时只重新编译打包更新变化了的代码，不变的代码使用缓存，从而使更新速度更快。</li>
+</ol>
+<h2 id="es6新特性"><a href="#es6新特性" class="headerlink" title="es6新特性"></a>es6新特性</h2><ol>
+<li>let const</li>
+<li>symbol</li>
+<li>模版字符串</li>
+<li>结构表达式</li>
+<li>Map和Set</li>
+<li>…扩展运算符</li>
+<li>参数默认值</li>
+<li>箭头函数 （this指向）</li>
+<li>Promise 和 Proxy</li>
+<li>模块化</li>
+</ol>
+<h4 id="let-const-var-有什么区别"><a href="#let-const-var-有什么区别" class="headerlink" title="let const var 有什么区别"></a>let const var 有什么区别</h4><ul>
+<li>var声明变量存在变量提升，let和const不存在变量提升</li>
+<li>let和const只能在块作用域里访问</li>
+<li>同一作用域下let和const不能声明同名变量，而var可以</li>
+<li>const定义常量，而且不能修改，但是在定义的对象时对象属性值可以改变 </li>
+</ul>
+<h4 id="WeakMap和WeakSet可以说一说吗"><a href="#WeakMap和WeakSet可以说一说吗" class="headerlink" title="WeakMap和WeakSet可以说一说吗"></a>WeakMap和WeakSet可以说一说吗</h4><p><code>WeakMap</code>是一种键值对的集合，类似于<code>Map</code>。不过，<code>WeakMap</code>与<code>Map</code>有几个重要的区别：</p>
+<ol>
+<li>在<code>WeakMap</code>中，只有对象可以作为键。换句话说，我们不能使用基本类型（如数字，字符串，布尔值等）作为<code>WeakMap</code>的键。</li>
+<li><code>WeakMap</code>的键是弱引用的。这意味着，如果一个对象只被<code>WeakMap</code>引用，那么这个对象可以被垃圾回收（GC）。当这个对象被垃圾回收后，它对应的键值对也会从<code>WeakMap</code>中自动移除。</li>
+<li><code>WeakMap</code>不可遍历，也就是说，我们不能使用像<code>for...of</code>这样的循环来遍历<code>WeakMap</code>。</li>
+</ol>
+<p>由于这些特性，<code>WeakMap</code>在处理内存泄漏问题和管理对象私有数据等场景中有着显著的优势。</p>
+<p><code>WeakSet</code>也是一种集合，类似于<code>Set</code>。<code>WeakSet</code>与<code>Set</code>的主要区别包括：</p>
+<ol>
+<li>在<code>WeakSet</code>中，只有对象可以作为值。也就是说，我们不能将基本类型（如数字，字符串，布尔值等）添加到<code>WeakSet</code>中。</li>
+<li><code>WeakSet</code>中的对象是弱引用的。如果一个对象只被<code>WeakSet</code>引用，那么这个对象可以被垃圾回收。当这个对象被垃圾回收后，它会自动从<code>WeakSet</code>中移除。</li>
+<li><code>WeakSet</code>不可遍历，也就是说，我们不能使用像<code>for...of</code>这样的循环来遍历<code>WeakSet</code>。</li>
+</ol>
+<p><code>WeakSet</code>在处理对象的唯一性、内存泄漏等问题上有其独特的应用。</p>
+<h4 id="实现类继承有哪些方式"><a href="#实现类继承有哪些方式" class="headerlink" title="实现类继承有哪些方式"></a>实现类继承有哪些方式</h4><ol>
+<li>原型链继承</li>
+</ol>
+<p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。<br>继承的本质就是复制，即重写原型对象，代之以一个新类型的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student.prototype = <span class="built_in">Object</span>.create(Person.prototype)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="大屏实现自适应的方法"><a href="#大屏实现自适应的方法" class="headerlink" title="大屏实现自适应的方法"></a>大屏实现自适应的方法</h4><h4 id="说一下js事件循环"><a href="#说一下js事件循环" class="headerlink" title="说一下js事件循环"></a>说一下js事件循环</h4><h4 id="es6之前没有promise是怎么实现异步编程的"><a href="#es6之前没有promise是怎么实现异步编程的" class="headerlink" title="es6之前没有promise是怎么实现异步编程的"></a>es6之前没有promise是怎么实现异步编程的</h4>
         </div>
 
         
@@ -286,6 +334,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/09/07/%E6%89%8B%E5%86%99Promise/index/">手写Promise/index</a>
             
             
             <a class="next" rel="next" href="/2023/09/06/%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81/index/">防抖节流/index</a>

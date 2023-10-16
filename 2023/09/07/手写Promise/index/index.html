@@ -17,7 +17,7 @@
     <meta name="keywords" content="JAVA,IT,游戏">
 
 
-<title>Vue面试题/observb | Baozoulolw的部落阁</title>
+<title>手写Promise/index | Baozoulolw的部落阁</title>
 
 
 
@@ -135,7 +135,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Vue面试题/observb</h1>
+            <h1 class="post-title">手写Promise/index</h1>
             
                 <div class="post-meta">
                     
@@ -144,20 +144,20 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2023-09-06&nbsp;&nbsp;22:21:54</a>
+                        Date: <a href="#">2023-09-07&nbsp;&nbsp;17:09:04</a>
                         </span>
                     
                     
                     
                         <span class="post-count">
                     Words:
-                        <a href="">93</a>
+                        <a href="">319</a>
                         </span>
                     
                     
                         <span class="post-count">
                     Time:
-                        <a href="">1min</a>
+                        <a href="">2min</a>
                         </span>
                     
                 </div>
@@ -165,51 +165,189 @@
         </header>
 
         <div class="post-content">
-            const data = {
-  num:1,
-  obj:{
-    name:'asd'
+            const resolveReturn = (value, promise, resolve, reject) => {
+  if (promise === value) {
+    throw new TypeError("Chaining cycle detected for promise #<Promise>")
+  }
+  if (value instanceof MyPromise) {
+    value.then(res => {
+      resolve(res)
+    }, err => {
+      reject(err)
+    })
+  } else {
+    resolve(value)
   }
 }
 
-const defineReactive = (target,key,value) => {
-  obsevreb(value)
-  Object.defineProperty(target,key,{
-    get(){
-      return value
-    },
-    set(newValue){
-      if(newValue !== value){
-        target[key] = newValue
-        obsevreb(newValue)
+class MyPromise {
+
+  state = 'pending' // 状态
+
+  res // 结果
+
+  err // 错误信息
+
+  thenCallBack = []
+
+  cacheCallback
+
+  constructor(callback) {
+    try {
+      callback(this.resolve.bind(this), this.reject.bind(this));
+    } catch (e) {
+      console.log('cons  err')
+      this.reject(e)
+    }
+  }
+
+  resolve(param) {
+    if (this.state !== 'pending') {
+      return
+    }
+    this.state = 'full'
+    this.res = param
+    console.log(this.thenCallBack,'resolve then callback')
+    this.thenCallBack.forEach(({full}) => {
+      full(param)
+    })
+  }
+
+  reject(param) {
+    if (this.state !== 'pending') {
+      return
+    }
+    this.state = 'fail'
+    this.res = param
+    console.log(this.thenCallBack,'reject then callback')
+    this.thenCallBack.forEach(({fail}) => {
+      fail(param)
+    })
+  }
+
+  then(full, fail) {
+    let resolve, reject
+    if (typeof full !== 'function') {
+      if (full === undefined) {
+        full = () => {
+        }
+      } else {
+        full = x => x
       }
     }
-  })
-}
-
-const obsevreb = (data) => {
-  if(typeof data !== 'object' || typeof data == null){
-    return data
-  }
-  if(Object.prototype.toString.call(data) === '[Object array]'){
-    data.__proto__= newProto
-  }else{
-    for(const key in data){
-      defineReactive(data,key,data[key])
+    if (typeof fail !== 'function') {
+      if (fail === undefined) {
+        fail = () => {
+        }
+      } else {
+        fail = x => x
+      }
     }
+
+
+    let returnPromise = new MyPromise((res, rej) => {
+      resolve = res;
+      reject = rej;
+    })
+    if (this.state === 'full') {
+      queueMicrotask(() => {
+        try {
+          let returnValue = full(this.res)
+          resolveReturn(returnValue, returnPromise, resolve, reject)
+        } catch (e) {
+          reject(e)
+        }
+      })
+    } else if (this.state === 'fail') {
+      queueMicrotask(() => {
+        try {
+          console.log('fail')
+          let returnValue = fail(this.res)
+          resolveReturn(returnValue, returnPromise, resolve, reject)
+        } catch (e) {
+          reject(e)
+        }
+      })
+    } else {
+      this.thenCallBack.push({
+        full: (res) => {
+          queueMicrotask(() => {
+            try {
+              let returnValue = full(this.res)
+              resolveReturn(returnValue, returnPromise, resolve, reject)
+            } catch (e) {
+              reject(e)
+            }
+          })
+        },
+        fail: (res) => {
+          queueMicrotask(() => {
+            try {
+              console.log('fail')
+              let returnValue = fail(this.res)
+              resolveReturn(returnValue, returnPromise, resolve, reject)
+            } catch (e) {
+              reject(e)
+            }
+          })
+        }
+      })
+    }
+    return returnPromise
   }
+
+  cache(callback) {
+    return this.then(undefined, callback)
+  }
+
+  finally(callback) {
+    return this.then(callback, callback)
+  }
+
+
+  static resolve() {
+
+  }
+
+  static reject() {
+
+  }
+
+  static all(array) {
+
+  }
+
+  static race() {
+
+  }
+
+  static allSet() {
+
+  }
+
 }
 
-const methods = ['push','splice','shift','unshift','pop','reverse','sort']
-
-const newProto = Object.create(Array.prototype)
-const oldProto = Array.prototype
-
-methods.forEach(method => {
-  newProto[method] = (...args) => {
-    oldProto[method](...args);
-  }
+let promise = new MyPromise((resolve, reject) => {
+  reject('1234')
+}).then(res => {
+      console.log('then full:' + res)
+    }
+).cache(err => {
+  console.log('cache err:' + err)
 })
+
+
+//p2.then(() => {},err => console.log(err))
+
+/*let promise = new Promise(resolve => {
+  setTimeout(() => {
+    resolve(200)
+  },2000)
+})
+
+const p2 = promise.then((res) => {
+  return p2
+})*/
 
         </div>
 
@@ -252,10 +390,10 @@ methods.forEach(method => {
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2023/09/06/Vue%E9%9D%A2%E8%AF%95%E9%A2%98/Vue%E9%9D%A2%E8%AF%95%E9%A2%98/">Vue面试题</a>
+                <a class="prev" rel="prev" href="/2023/09/08/%E6%89%8B%E5%86%99Promise/test/">手写Promise/test</a>
             
             
-            <a class="next" rel="next" href="/2023/09/06/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%8A%80%E5%B7%A7/%E7%BD%91%E9%A1%B5%E8%AF%BB%E5%8F%96%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%B9/">网页读取本地文件夹</a>
+            <a class="next" rel="next" href="/2023/09/06/%E9%9D%A2%E8%AF%95%E6%8F%90%E9%97%AE/%E9%9D%A2%E8%AF%95%E6%8F%90%E9%97%AE/">面试提问</a>
             
         </section>
 
